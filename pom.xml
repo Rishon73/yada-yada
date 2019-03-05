@@ -7,6 +7,10 @@
     <name>LeanFT JUnit Test</name>
     <description>LeanFT JUnit Test</description>
 
+    <properties>
+        <lft.ver>14.51.0</lft.ver>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -17,25 +21,25 @@
         <dependency>
             <groupId>com.hp.lft</groupId>
             <artifactId>sdk</artifactId>
-            <version>14.2.0</version>
+            <version>${lft.ver}</version>
         </dependency>
 
         <dependency>
             <groupId>com.hp.lft</groupId>
             <artifactId>report</artifactId>
-            <version>14.2.0</version>
+            <version>${lft.ver}</version>
         </dependency>
 
         <dependency>
             <groupId>com.hp.lft</groupId>
             <artifactId>unittesting</artifactId>
-            <version>14.2.0</version>
+            <version>${lft.ver}</version>
         </dependency>
 
         <dependency>
             <groupId>com.hp.lft</groupId>
             <artifactId>verifications</artifactId>
-            <version>14.2.0</version>
+            <version>${lft.ver}</version>
         </dependency>
     </dependencies>
 
@@ -48,7 +52,7 @@
     </repositories>
 
     <build>
-        <!--testSourceDirectory>src/main/java</testSourceDirectory-->
+        <testSourceDirectory>src/main/java</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -119,6 +123,22 @@
                             </configuration>
                         </execution>
                     </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.hpe.lft</groupId>
+                    <artifactId>appmodel-generator-mojol</artifactId>
+                    <version>14.51.0</version>
+                    <executions>
+                        <execution>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <!--optional parameters -->
+                    <configuration/>
                 </plugin>
                 <!--plugin>
                     <groupId>org.eclipse.m2e</groupId>
