@@ -5,8 +5,7 @@ Runs/
 out/
 target/
 workspace.xml
-**/.idea/libraries/
-.idea/*
+.idea/
 /bin
 /releases
 /maven
