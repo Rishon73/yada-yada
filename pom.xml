@@ -62,7 +62,21 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>com.hpe.lft</groupId>
+                <artifactId>appmodel-generator-mojo</artifactId>
+                <version>${lft.ver}</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <!--optional parameters -->
+                <configuration/>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -123,22 +137,6 @@
                             </configuration>
                         </execution>
                     </executions>
-                </plugin>
-
-                <plugin>
-                    <groupId>com.hpe.lft</groupId>
-                    <artifactId>appmodel-generator-mojol</artifactId>
-                    <version>14.51.0</version>
-                    <executions>
-                        <execution>
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>generate</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <!--optional parameters -->
-                    <configuration/>
                 </plugin>
                 <!--plugin>
                     <groupId>org.eclipse.m2e</groupId>
