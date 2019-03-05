@@ -1,0 +1,22 @@
+# Shahar
+#--------------
+RunResults/
+Runs/
+out/
+target/
+workspace.xml
+**/.idea/libraries/
+.idea/*
+/bin
+/releases
+/maven
+/build/
+/repository/
+/.settings
+/test-output/
+/img
+/dependencies
+
+appmodels/
+
+*.iml
