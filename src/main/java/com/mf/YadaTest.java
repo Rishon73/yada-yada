@@ -18,7 +18,7 @@ import unittesting.*;
 public class YadaTest extends UnitTestClassBase {
     private Browser browser;
     private VerificationData verificationData = new VerificationData();
-    private yadayadaAppModel appModel;
+    private yadayadaAppModel model;
 
     public YadaTest() {
         //Change this constructor to private if you supply your own public constructor
@@ -37,7 +37,7 @@ public class YadaTest extends UnitTestClassBase {
 
     @Before
     public void setUp() throws Exception {
-        browser = BrowserFactory.launch(BrowserType.CHROME);
+        browser = BrowserFactory.launch(BrowserType.FIREFOX);
     }
 
     @After
@@ -49,71 +49,32 @@ public class YadaTest extends UnitTestClassBase {
     public void test() throws GeneralLeanFtException, ReportException {
         try {
             browser.navigate("https://www.google.com/");
-            appModel = new yadayadaAppModel(browser);
-            appModel.SearchEditField().setValue("yada yada yada");
-            appModel.GoogleSearchButton().click();
+            model = new yadayadaAppModel(browser);
+            model.GooglePage().SearchEditField().highlight();
+            model.GooglePage().SearchEditField().setValue("yada yada yada");
+            model.GooglePage().GoogleSearchButton().highlight();
+            model.GooglePage().GoogleSearchButton().click();
 
-            Thread.sleep(3000);
+            Thread.sleep(2000);
 
             String expected = "Urban Dictionary: Yada yada yada";
-            String actual = appModel.YadaLink().getInnerText();
+            String actual = model.YadaGoogleSearchPage().UrbanDictionaryYadaLink().getInnerText();
 
-            boolean isMatch = actualMatchesExpected(true, "Check link",
+            boolean isMatch = actualMatchesExpected(true, "Check Yada link",
                     "Verify the yada yada yada link...", actual, expected);
             if (isMatch) {
+                model.YadaGoogleSearchPage().UrbanDictionaryYadaLink().highlight();
+                model.YadaGoogleSearchPage().UrbanDictionaryYadaLink().click();
                 Reporter.reportVerification(Status.Passed, verificationData);
-                appModel.YadaLink().click();
+
+                // let the page load...
+                Thread.sleep(2000);
             }
             else
                 Reporter.reportVerification(Status.Failed, verificationData);
 
             // Report result to JUnit framework
             assertTrue("[Google search results] Expected: " + expected + ", Actual: " + actual, isMatch);
-
-            /*
-            EditField searchEditField = browser.describe(EditField.class, new EditFieldDescription.Builder()
-                    .name("q")
-                    .tagName("INPUT")
-                    .type("text").build());
-            searchEditField.setValue("yada yada yada");
-
-            Button googleSearchButton = browser.describe(Button.class, new ButtonDescription.Builder()
-                    .buttonType("submit")
-                    .name("Google Search")
-                    .tagName("INPUT").build());
-            googleSearchButton.click();
-
-
-//            Image e6CLtXdiJ7BTMQMnAHXxFm6IICvhwYImage = browser.describe(Image.class, new ImageDescription.Builder()
-//                    .alt("")
-//                    .tagName("INPUT")
-//                    .type(com.hp.lft.sdk.web.ImageType.BUTTON).build());
-//            e6CLtXdiJ7BTMQMnAHXxFm6IICvhwYImage.click();
-
-
-            Thread.sleep(3000);
-
-            String expected = "Urban Dictionary: yadayadayada";
-            String actual = browser.describe(Link.class, new LinkDescription.Builder()
-                    .href("https://www.urbandictionary.com/define.php?term=yadayadayada")
-                    .tagName("A").build()).getInnerText();
-
-
-            boolean isMatch = actualMatchesExpected("Check link","Verify the yada yada yada link...", actual, expected);
-            if (isMatch) {
-                Reporter.reportVerification(Status.Passed, verificationData);
-
-                Link urbanDictionaryYadayadayadaLink = browser.describe(Link.class, new LinkDescription.Builder()
-                        .innerText("Urban Dictionary: yadayadayada")
-                        .tagName("A").build());
-                urbanDictionaryYadayadayadaLink.click();
-            }
-            else
-                Reporter.reportVerification(Status.Failed, verificationData);
-
-            // Report result to JUnit framework
-            assertTrue("[Google search results] Expected: " + expected + ", Actual: " + actual, isMatch);
-            */
 
         } catch (GeneralLeanFtException glftex) {
             System.out.println("Hellloooo Jerry!!!!");
