@@ -9,6 +9,8 @@
       <sourceFolder url="file://$MODULE_DIR$/appmodels" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
+
+    
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
